@@ -1,5 +1,8 @@
+import React from "react";
 import { PressableProps, StyleSheet } from "react-native";
+
 import { colors } from "../constants/colors";
+
 import { Pressable } from "./Pressable";
 import { Text } from "./Text";
 
@@ -36,17 +39,17 @@ export function Button({
 }
 
 const styles = StyleSheet.create({
-  container: {
-    borderRadius: 16,
-    paddingVertical: 17,
-    alignItems: "center",
-    justifyContent: "center",
-  },
   contained: {
     backgroundColor: colors.blue,
   },
+  container: {
+    alignItems: "center",
+    borderRadius: 16,
+    justifyContent: "center",
+    paddingVertical: 17,
+  },
   outlined: {
-    borderWidth: 1,
     borderColor: colors.blue,
+    borderWidth: 1,
   },
 });

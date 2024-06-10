@@ -1,11 +1,13 @@
-import { colors } from "@/constants/colors";
-import { StyleProp, StyleSheet, TextStyle } from "react-native";
+import React from "react";
+import { StyleProp, TextStyle } from "react-native";
+
 import { Text } from "./Text";
 
 type AmountType = {
   amount: number;
   color?: string;
   fontSize?: number;
+  fractionFontSize?: number;
   style?: StyleProp<
     Omit<TextStyle, "fontFamily" | "fontWeight" | "fontStyle" | "fontSize">
   >;
@@ -16,33 +18,21 @@ export function Amount({
   color,
   fontSize = 26,
   style,
+  fractionFontSize = 16,
 }: AmountType) {
   const amountString = amount.toFixed(2);
   const [whole, fraction] = amountString.split(".");
-  const isPositive = amount >= 0;
-
-  const textColor = color || (isPositive ? colors.darkBlue : colors.green);
 
   return (
-    <Text
-      variant="Medium"
-      fontSize={fontSize}
-      style={[{ color: textColor }, style]}
-    >
+    <Text variant="Medium" fontSize={fontSize} style={[{ color }, style]}>
       {`${Math.abs(parseInt(whole, 10)).toLocaleString()}.`}
       <Text
         variant="Medium"
         style={{ color: color || "#02295C66" }}
-        fontSize={16}
+        fontSize={fractionFontSize}
       >
         {fraction} ₮
       </Text>
     </Text>
   );
 }
-
-const styles = StyleSheet.create({
-  text: {
-    fontFamily: "OM",
-  },
-});

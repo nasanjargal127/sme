@@ -1,5 +1,6 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { StyleSheet, View, ViewProps } from "react-native";
+
 import { colors } from "../constants/colors";
 import { sizes } from "../constants/sizes";
 
@@ -21,11 +22,11 @@ export function Container({
 
 const styles = StyleSheet.create({
   container: {
+    borderTopLeftRadius: sizes.medium,
+    borderTopRightRadius: sizes.medium,
     flex: 1,
     height: "100%",
     overflow: "hidden",
-    borderTopLeftRadius: sizes.medium,
-    borderTopRightRadius: sizes.medium,
     paddingHorizontal: sizes.small,
   },
 });

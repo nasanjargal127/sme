@@ -1,6 +1,10 @@
-import { colors } from "@/constants/colors";
+import React from "react";
 import { StyleSheet, View } from "react-native";
+
+import { colors } from "@/constants/colors";
+
 import { sizes } from "../constants/sizes";
+
 import { Amount } from "./Amount";
 import { BankLogoRender } from "./BankLogos";
 import { Text } from "./Text";
@@ -47,10 +51,10 @@ export function AccountCard({
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: "center",
     borderRadius: sizes.standard,
-    padding: sizes.standard,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
+    padding: sizes.standard,
   },
 });

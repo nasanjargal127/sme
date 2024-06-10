@@ -3,7 +3,7 @@ import { FlatList, StyleSheet, View } from "react-native";
 
 import { BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
 import { format } from "date-fns";
-import { useLocalSearchParams, useNavigation } from "expo-router";
+import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -37,6 +37,7 @@ export default function AccountDetail() {
   const params = useLocalSearchParams();
   const insets = useSafeAreaInsets();
   const bottomSheetRef = useRef<BottomSheetModal>(null);
+  const router = useRouter();
 
   useEffect(() => {
     navigation.setOptions({
@@ -73,7 +74,12 @@ export default function AccountDetail() {
             <>
               <View style={{ flexDirection: "row", gap: sizes.small }}>
                 <ActionButton
-                  onPress={() => console.log("ok")}
+                  onPress={() =>
+                    router.navigate({
+                      params: { primaryColor: params.primaryColor },
+                      pathname: "/transaction/transfer",
+                    })
+                  }
                   iconName="history"
                   text="Гүйлгээ хийх"
                   bgColor={params.primaryColor as string}

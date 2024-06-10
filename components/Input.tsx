@@ -6,7 +6,6 @@ import {
   TextInputProps,
   View,
 } from "react-native";
-import { colors } from "../constants/colors";
 
 import Animated, {
   Extrapolation,
@@ -15,6 +14,8 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
+
+import { colors } from "../constants/colors";
 
 const Y_VALUE = 14;
 
@@ -46,7 +47,7 @@ export function Input({
       [props.value ? -yValue : 0, -yValue],
       {
         extrapolateRight: Extrapolation.CLAMP,
-      }
+      },
     );
     const fontSize = interpolate(
       animatedValue.value,
@@ -54,18 +55,18 @@ export function Input({
       [props.value ? initialFontSize : targetFontSize, initialFontSize],
       {
         extrapolateRight: Extrapolation.CLAMP,
-      }
+      },
     );
     const fontFamily = animatedValue.value === 1 ? "Regular" : "Medium";
 
     return {
+      fontFamily,
+      fontSize,
       transform: [
         {
           translateY,
         },
       ],
-      fontSize,
-      fontFamily,
     };
   });
 
@@ -106,24 +107,24 @@ export function Input({
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
     alignItems: "center",
     borderRadius: 16,
+    borderWidth: 1,
+    flexDirection: "row",
+    overflow: "hidden",
     paddingHorizontal: 16,
     paddingVertical: 12,
-    borderWidth: 1,
     position: "relative",
-    overflow: "hidden",
   },
   fieldbody: {
-    paddingTop: 10,
-    height: "100%",
     flex: 1,
     fontFamily: "Medium",
     fontSize: 18,
+    height: "100%",
+    paddingTop: 10,
   },
   labelStyle: {
-    position: "absolute",
     marginLeft: 16,
+    position: "absolute",
   },
 });

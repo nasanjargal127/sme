@@ -1,18 +1,17 @@
-import { Tabs } from "expo-router";
 import React from "react";
 
-import { Text } from "@/components/Text";
+import * as Haptics from "expo-haptics";
+import { Tabs } from "expo-router";
 
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
+import { Text } from "@/components/Text";
 import { colors } from "@/constants/colors";
-import * as Haptics from "expo-haptics";
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarStyle: { borderTopWidth: 0 },
         tabBarLabel: ({ children, focused }) => {
           return (
             <Text
@@ -26,6 +25,7 @@ export default function TabLayout() {
             </Text>
           );
         },
+        tabBarStyle: { borderTopWidth: 0 },
       }}
       screenListeners={{
         tabPress: () => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium),
@@ -35,37 +35,37 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Данс",
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({ focused }) => (
             <TabBarIcon
               name="wallet"
               color={focused ? colors.blue : colors["darkBlue-40"]}
             />
           ),
+          title: "Данс",
         }}
       />
       <Tabs.Screen
         name="service"
         options={{
-          title: "Үйлчилгээ",
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({ focused }) => (
             <TabBarIcon
               name="task-list"
               color={focused ? colors.blue : colors["darkBlue-40"]}
             />
           ),
+          title: "Үйлчилгээ",
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
-          title: "Бүртгэл",
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({ focused }) => (
             <TabBarIcon
               name="person-account"
               color={focused ? colors.blue : colors["darkBlue-40"]}
             />
           ),
+          title: "Бүртгэл",
         }}
       />
     </Tabs>

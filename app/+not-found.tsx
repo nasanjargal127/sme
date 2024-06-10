@@ -1,5 +1,8 @@
-import { Link, Stack } from "expo-router";
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+
+import { Link, Stack } from "expo-router";
+
 export default function NotFoundScreen() {
   return (
     <>
@@ -16,8 +19,8 @@ export default function NotFoundScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: "center",
+    flex: 1,
     justifyContent: "center",
     padding: 20,
   },

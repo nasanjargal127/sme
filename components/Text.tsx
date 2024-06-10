@@ -1,3 +1,4 @@
+import React from "react";
 import {
   StyleProp,
   Text as TextBase,
@@ -35,9 +36,6 @@ export function Text({
   return (
     <TextBase
       {...props}
-      children={
-        typeof children === "string" ? children.replaceAll("\n", "") : children
-      }
       style={[
         style,
         {
@@ -45,6 +43,8 @@ export function Text({
           fontSize: fontSize,
         },
       ]}
-    />
+    >
+      {typeof children === "string" ? children.replaceAll("\n", "") : children}
+    </TextBase>
   );
 }

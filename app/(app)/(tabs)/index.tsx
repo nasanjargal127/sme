@@ -1,4 +1,10 @@
+import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
+
+import { BlurView } from "expo-blur";
+import { useRouter } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { AccountCard } from "@/components/AccountCard";
 import { Amount } from "@/components/Amount";
@@ -9,35 +15,31 @@ import { Text } from "@/components/Text";
 import { UserName } from "@/components/UserName";
 import { colors } from "@/constants/colors";
 import { sizes } from "@/constants/sizes";
-import { BlurView } from "expo-blur";
-import { useRouter } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const accounts = [
   {
-    id: 2,
-    bankName: "Голомт банк",
-    title: "Дэлгүүр пос",
     accountNumber: "2025116077",
     balance: 100000.01,
+    bankName: "Голомт банк",
+    id: 2,
     primaryColor: "#245BA5",
+    title: "Дэлгүүр пос",
   },
   {
-    id: 4,
-    bankName: "Хас банк",
-    title: "Хас банк",
     accountNumber: "5004410875",
     balance: 70000,
+    bankName: "Хас банк",
+    id: 4,
     primaryColor: "#E17000",
+    title: "Хас банк",
   },
   {
-    id: 3,
-    bankName: "Хаан банк",
-    title: "Дэлгүүр пос",
     accountNumber: "5551169112",
     balance: 30000,
+    bankName: "Хаан банк",
+    id: 3,
     primaryColor: "#04715E",
+    title: "Дэлгүүр пос",
   },
 ];
 
@@ -54,26 +56,26 @@ export default function HomeScreen() {
     <>
       <View
         style={{
-          paddingTop: insets.top,
-          paddingHorizontal: sizes.medium,
           gap: sizes.medium,
+          paddingHorizontal: sizes.medium,
+          paddingTop: insets.top,
         }}
       >
         <StatusBar style="light" />
         <View
           style={{
+            alignItems: "center",
             flexDirection: "row",
             gap: 12,
-            alignItems: "center",
             paddingVertical: 20,
           }}
         >
           <View
             style={{
-              width: 48,
               aspectRatio: 1,
               backgroundColor: colors.blue,
               borderRadius: 24,
+              width: 48,
             }}
           />
           <UserName title="С. Очмандах" company="Oneline Technology LLC" />
@@ -86,8 +88,8 @@ export default function HomeScreen() {
         >
           <View
             style={{
-              paddingVertical: sizes.standard,
               paddingHorizontal: sizes.micro,
+              paddingVertical: sizes.standard,
             }}
           >
             <Text variant="Medium" fontSize={20}>
@@ -122,6 +124,8 @@ export default function HomeScreen() {
             style={styles.blurView}
             intensity={90}
             tint="systemUltraThinMaterialDark"
+            blurReductionFactor={4}
+            experimentalBlurMethod="dimezisBlurView"
           >
             <Text style={{ color: colors["white-60"] }}>
               {accounts.length} дансны нийт үлдэгдэл
@@ -137,9 +141,9 @@ export default function HomeScreen() {
               <Pressable
                 key={account.id}
                 onPress={() =>
-                  router.push({
-                    pathname: "accountDetail",
+                  router.navigate({
                     params: { primaryColor: account.primaryColor },
+                    pathname: "/transaction/accountDetail",
                   })
                 }
               >
@@ -177,10 +181,10 @@ function Circle({
   return (
     <View
       style={{
-        width,
+        backgroundColor: bgColor,
         borderRadius: width / 2,
         height,
-        backgroundColor: bgColor,
+        width,
       }}
     />
   );
@@ -188,23 +192,23 @@ function Circle({
 
 const styles = StyleSheet.create({
   blurView: {
-    borderRadius: sizes.standard,
-    width: "100%",
     aspectRatio: 5 / 3,
+    borderRadius: sizes.standard,
+    justifyContent: "center",
     overflow: "hidden",
+    paddingLeft: sizes.standard,
     position: "absolute",
     top: 56,
-    paddingLeft: sizes.standard,
-    justifyContent: "center",
+    width: "100%",
   },
   bluredContent: {
-    borderRadius: sizes.standard,
-    width: "100%",
-    aspectRatio: 5 / 3,
-    overflow: "hidden",
-    flexDirection: "row",
     alignItems: "center",
+    aspectRatio: 5 / 3,
     backgroundColor: colors.white,
+    borderRadius: sizes.standard,
+    flexDirection: "row",
     justifyContent: "space-between",
+    overflow: "hidden",
+    width: "100%",
   },
 });

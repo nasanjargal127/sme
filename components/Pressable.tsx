@@ -1,5 +1,4 @@
-import * as Haptics from "expo-haptics";
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 import {
   Pressable as OrigPressable,
   PressableProps,
@@ -8,6 +7,8 @@ import {
   StyleSheet,
   ViewStyle,
 } from "react-native";
+
+import * as Haptics from "expo-haptics";
 
 type PressablePropsType = {
   children: React.ReactNode;
@@ -25,7 +26,7 @@ export function Pressable({
 }: PressablePropsType) {
   const getOpacity = useCallback(
     (pressed: boolean) => (disabled ? 0.4 : pressed ? 0.6 : 1),
-    [disabled]
+    [disabled],
   );
 
   const style = useCallback(
@@ -34,7 +35,7 @@ export function Pressable({
     }: PressableStateCallbackType): StyleProp<ViewStyle> &
       PressableProps["style"] =>
       StyleSheet.flatten([propsStyle, { opacity: getOpacity(pressed) }]),
-    [getOpacity, propsStyle]
+    [getOpacity, propsStyle],
   );
 
   return (
