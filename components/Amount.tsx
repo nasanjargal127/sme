@@ -1,5 +1,5 @@
+import { colors } from "@/constants/colors";
 import { StyleProp, StyleSheet, TextStyle } from "react-native";
-import { colors } from "../constants/colors";
 import { Text } from "./Text";
 
 type AmountType = {
@@ -24,7 +24,11 @@ export function Amount({
   const textColor = color || (isPositive ? colors.darkBlue : colors.green);
 
   return (
-    <Text variant="Medium" fontSize={26} style={[{ color: textColor }, style]}>
+    <Text
+      variant="Medium"
+      fontSize={fontSize}
+      style={[{ color: textColor }, style]}
+    >
       {`${Math.abs(parseInt(whole, 10)).toLocaleString()}.`}
       <Text
         variant="Medium"

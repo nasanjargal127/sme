@@ -1,11 +1,10 @@
 import { Container } from "@/components/Container";
+import { Icon, IconName } from "@/components/Icon";
 import { Pressable } from "@/components/Pressable";
 import { Text } from "@/components/Text";
 import { UserName } from "@/components/UserName";
 import { colors } from "@/constants/colors";
 import { sizes } from "@/constants/sizes";
-import { MaterialIcons } from "@expo/vector-icons";
-import { ReactNode } from "react";
 import { StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -14,22 +13,9 @@ export default function TabTwoScreen() {
   return (
     <>
       <View
-        style={{
-          paddingTop: insets.top + sizes.medium,
-          paddingBottom: sizes.medium,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+        style={[styles.container, { paddingTop: insets.top + sizes.medium }]}
       >
-        <View
-          style={{
-            backgroundColor: colors.blue,
-            width: sizes.medium * 5,
-            aspectRatio: 1,
-            borderRadius: (sizes.medium * 5) / 2,
-            marginBottom: sizes.standard,
-          }}
-        />
+        <View style={styles.profile} />
         <UserName
           title="С. Очмандах"
           company="Oneline Technology LLC"
@@ -38,21 +24,17 @@ export default function TabTwoScreen() {
       </View>
       <Container style={{ paddingTop: sizes.standard, gap: sizes.small }}>
         <Row
-          icon={
-            <MaterialIcons name="checklist" size={18} color={colors.blue} />
-          }
+          iconName="outlined-task-list"
           title="Хувийн мэдээлэл"
           onPress={() => console.log("ok")}
         />
         <Row
-          icon={
-            <MaterialIcons name="sticky-note-2" size={20} color={colors.blue} />
-          }
+          iconName="receipt"
           title="Эрхийн тохиргоо"
           onPress={() => console.log("ok")}
         />
         <Row
-          icon={<MaterialIcons name="logout" size={18} color={colors.blue} />}
+          iconName="arrow-hook-down-right"
           title="Системээс гарах"
           onPress={() => console.log("ok")}
         />
@@ -63,16 +45,16 @@ export default function TabTwoScreen() {
 
 function Row({
   title,
-  icon,
+  iconName,
   onPress,
 }: {
   title: string;
-  icon: ReactNode;
+  iconName: IconName;
   onPress: () => void;
 }) {
   return (
     <Pressable style={styles.rowContainer} onPress={onPress}>
-      {icon}
+      <Icon name={iconName} height={20} color={colors.blue} />
       <Text fontSize={16} variant="Medium" style={{ color: colors.darkBlue }}>
         {title}
       </Text>
@@ -81,6 +63,11 @@ function Row({
 }
 
 const styles = StyleSheet.create({
+  container: {
+    paddingBottom: sizes.medium,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   rowContainer: {
     borderRadius: sizes.standard,
     borderColor: colors.lightBlue,
@@ -89,7 +76,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: sizes.medium,
   },
-  container: {
-    display: "flex",
+  profile: {
+    backgroundColor: colors.blue,
+    width: sizes.medium * 5,
+    aspectRatio: 1,
+    borderRadius: (sizes.medium * 5) / 2,
+    marginBottom: sizes.standard,
   },
 });

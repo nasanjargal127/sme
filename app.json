@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "sme-app",
-    "slug": "sme-app",
+    "name": "sme",
+    "slug": "sme",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

@@ -136,13 +136,18 @@ export default function HomeScreen() {
             {accounts.map((account) => (
               <Pressable
                 key={account.id}
-                onPress={() => router.push("/signIn")}
+                onPress={() =>
+                  router.push({
+                    pathname: "accountDetail",
+                    params: { primaryColor: account.primaryColor },
+                  })
+                }
               >
                 <AccountCard
                   title={account.title}
                   balance={account.balance}
                   accountNumber={account.accountNumber}
-                  primaryColor={account.primaryColor}
+                  textColor={account.primaryColor}
                   bankId={account.id}
                 />
               </Pressable>

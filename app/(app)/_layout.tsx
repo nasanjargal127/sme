@@ -1,30 +1,29 @@
+import { Text } from "@/components/Text";
+import { colors } from "@/constants/colors";
 import { Stack } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
 import "react-native-reanimated";
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
 export default function AuthLayout() {
-  // const colorScheme = useColorScheme();
-  // const [loaded] = useFonts({
-  //   SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  // });
-
-  // useEffect(() => {
-  //   if (loaded) {
-  //     SplashScreen.hideAsync();
-  //   }
-  // }, [loaded]);
-
-  // if (!loaded) {
-  //   return null;
-  // }
-
   return (
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      {/* <Stack.Screen name="+not-found" /> */}
+      <Stack.Screen
+        name="accountDetail"
+        options={{
+          headerShown: true,
+          title: "Дансны дэлгэрэнгүй",
+          headerTitleStyle: {
+            fontFamily: "Medium",
+            fontSize: 16,
+            color: colors.white,
+          },
+          headerShadowVisible: false,
+          headerLeft: () => <Text>back</Text>,
+          headerRight: () => <Text>forward</Text>,
+
+          // headerStyle: {backgroundColor: ""}
+        }}
+      />
     </Stack>
   );
 }

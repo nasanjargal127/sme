@@ -2,9 +2,9 @@ import { Tabs } from "expo-router";
 import React from "react";
 
 import { Text } from "@/components/Text";
+
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { colors } from "@/constants/colors";
-import { FontAwesome6, MaterialIcons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 
 export default function TabLayout() {
@@ -38,7 +38,7 @@ export default function TabLayout() {
           title: "Данс",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
-              name="card"
+              name="wallet"
               color={focused ? colors.blue : colors["darkBlue-40"]}
             />
           ),
@@ -49,10 +49,8 @@ export default function TabLayout() {
         options={{
           title: "Үйлчилгээ",
           tabBarIcon: ({ color, focused }) => (
-            <MaterialIcons
-              name="checklist"
-              size={28}
-              style={{ marginBottom: -3 }}
+            <TabBarIcon
+              name="task-list"
               color={focused ? colors.blue : colors["darkBlue-40"]}
             />
           ),
@@ -63,10 +61,8 @@ export default function TabLayout() {
         options={{
           title: "Бүртгэл",
           tabBarIcon: ({ color, focused }) => (
-            <FontAwesome6
-              name="user-gear"
-              size={20}
-              style={{ marginBottom: -3 }}
+            <TabBarIcon
+              name="person-account"
               color={focused ? colors.blue : colors["darkBlue-40"]}
             />
           ),

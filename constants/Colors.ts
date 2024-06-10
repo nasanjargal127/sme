@@ -10,5 +10,6 @@ export const colors = {
   black: "#000000",
   white: "#FFFFFF",
   "white-60": "rgba(255, 255, 255, 0.6)",
+  "white-20": "rgba(255, 255, 255, 0.2)",
   green: "#23C197",
 };
