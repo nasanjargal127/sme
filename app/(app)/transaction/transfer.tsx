@@ -7,6 +7,7 @@ import { StatusBar } from "expo-status-bar";
 import { AccountCard } from "@/components/AccountCard";
 import { Container } from "@/components/Container";
 import { Input } from "@/components/Input";
+import { KeyboardAvoidingView } from "@/components/KeyboardAvoidingView";
 import { colors } from "@/constants/colors";
 import { sizes } from "@/constants/sizes";
 
@@ -25,29 +26,36 @@ export default function AccountDetail() {
   }, [navigation, params?.primaryColor]);
 
   return (
-    <>
-      <StatusBar style="light" />
-      <View
-        style={{
-          paddingBottom: sizes.medium,
-          paddingHorizontal: sizes.small,
-          paddingTop: sizes.small,
-        }}
-      >
-        <AccountCard
-          title="Дэлгүүр"
-          bgColor={colors["white-20"]}
-          balance={2929929999}
-          accountNumber="2025116077"
-          textColor={colors.white}
-          bankId={2}
-        />
+    <KeyboardAvoidingView>
+      <View style={{ flex: 1 }}>
+        <StatusBar style="light" />
+        <View
+          style={{
+            paddingBottom: sizes.medium,
+            paddingHorizontal: sizes.small,
+            paddingTop: sizes.small,
+          }}
+        >
+          <AccountCard
+            title="Дэлгүүр"
+            bgColor={colors["white-20"]}
+            balance={2929929999}
+            accountNumber="2025116077"
+            textColor={colors.white}
+            bankId={2}
+          />
+        </View>
+        <Container
+          style={{ backgroundColor: colors.white, paddingTop: sizes.standard }}
+        >
+          <Input
+            label="Дансны дугаар"
+            value={value}
+            onChangeText={setValue}
+            keyboardType="numeric"
+          />
+        </Container>
       </View>
-      <Container
-        style={{ backgroundColor: colors.white, paddingTop: sizes.standard }}
-      >
-        <Input label="Дансны дугаар" value={value} onChangeText={setValue} />
-      </Container>
-    </>
+    </KeyboardAvoidingView>
   );
 }
