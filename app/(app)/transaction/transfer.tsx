@@ -10,8 +10,8 @@ import { z } from "zod";
 import { AccountCard } from "@/components/AccountCard";
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
+import { Input } from "@/components/Input";
 import { KeyboardAvoidingView } from "@/components/KeyboardAvoidingView";
-import { TestTextInput } from "@/components/TestTextInput";
 import { colors } from "@/constants/colors";
 import { sizes } from "@/constants/sizes";
 
@@ -83,20 +83,20 @@ export default function AccountDetail() {
             paddingTop: sizes.standard,
           }}
         >
-          <TestTextInput
+          <Input
             name="accountNumber"
             control={control}
             label="Дансны дугаар"
             keyboardType="numeric"
           />
-          <TestTextInput name="name" control={control} label="Нэр" />
-          <TestTextInput
+          <Input name="name" control={control} label="Нэр" />
+          <Input
             name="amount"
             control={control}
             label="Дүн"
             keyboardType="numeric"
           />
-          <TestTextInput name="description" control={control} label="Утга" />
+          <Input name="description" control={control} label="Утга" />
           <Button title="Үргэлжлүүлэх" onPress={handleSubmit(onSubmit)} />
         </Container>
       </View>
