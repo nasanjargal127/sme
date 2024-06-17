@@ -17,7 +17,9 @@ export type IconName =
   | "arrow-left"
   | "history"
   | "settings"
-  | "bookmark";
+  | "bookmark"
+  | "chevron-left"
+  | "book-information";
 
 export interface IconProps {
   color?: string;
@@ -118,6 +120,26 @@ function IconSVG({ color, name }: Pick<IconProps, "color" | "name">) {
           d="M6.19 21.854a.75.75 0 01-1.188-.61V6.25A3.25 3.25 0 018.252 3h7.499A3.25 3.25 0 0119 6.249v14.996a.75.75 0 01-1.188.609l-5.811-4.181-5.812 4.18zM17.5 6.249a1.75 1.75 0 00-1.75-1.75H8.253a1.75 1.75 0 00-1.75 1.75v13.532l5.062-3.64a.75.75 0 01.876 0l5.06 3.64V6.25z"
           fill={color}
         />
+      );
+    case "chevron-left":
+      return (
+        <Path
+          d="M15.707 4.293a1 1 0 010 1.414L9.414 12l6.293 6.293a1 1 0 01-1.414 1.414l-7-7a1 1 0 010-1.414l7-7a1 1 0 011.414 0z"
+          fill={color}
+        />
+      );
+    case "book-information":
+      return (
+        <>
+          <Path
+            d="M13.25 7a1 1 0 11-2 0 1 1 0 012 0zM11.5 9.75v5a.75.75 0 001.5 0v-5a.75.75 0 00-1.5 0z"
+            fill={color}
+          />
+          <Path
+            d="M4 4.5A2.5 2.5 0 016.5 2H18a2.5 2.5 0 012.5 2.5v14.25a.75.75 0 01-.75.75H5.5a1 1 0 001 1h13.25a.75.75 0 010 1.5H6.5A2.5 2.5 0 014 19.5v-15zM19 18V4.5a1 1 0 00-1-1H6.5a1 1 0 00-1 1V18H19z"
+            fill={color}
+          />
+        </>
       );
     default:
       return null;

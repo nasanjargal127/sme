@@ -2,6 +2,7 @@ import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 
 import { BlurView } from "expo-blur";
+import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -15,8 +16,9 @@ import { Text } from "@/components/Text";
 import { UserName } from "@/components/UserName";
 import { colors } from "@/constants/colors";
 import { sizes } from "@/constants/sizes";
+import { AccountType } from "@/types";
 
-const accounts = [
+const accounts: AccountType[] = [
   {
     accountNumber: "2025116077",
     balance: 100000.01,
@@ -52,6 +54,7 @@ export default function HomeScreen() {
     (acc, account) => acc + account.balance,
     0
   );
+
   return (
     <>
       <View
@@ -96,73 +99,114 @@ export default function HomeScreen() {
               Данс
             </Text>
           </View>
-          <View style={styles.bluredContent}>
-            {accounts.map((account) => {
-              const maxBalanceAccount = accounts.reduce(
-                (maxAccount, currentAccount) => {
-                  return currentAccount.balance > maxAccount.balance
-                    ? currentAccount
-                    : maxAccount;
-                },
-                accounts[0]
-              );
-              return (
-                <Circle
-                  key={account.accountNumber}
-                  width={
-                    ((sizes.window.width - 24) * account.balance) / totalBalance
-                  }
-                  height={
-                    (CARD_HEIGHT * account.balance) / maxBalanceAccount.balance
-                  }
-                  bgColor={account.primaryColor}
-                />
-              );
-            })}
-          </View>
-          <BlurView
-            style={styles.blurView}
-            intensity={90}
-            tint="systemUltraThinMaterialDark"
-            blurReductionFactor={4}
-            experimentalBlurMethod="dimezisBlurView"
-          >
-            <Text style={{ color: colors["white-60"] }}>
-              {accounts.length} дансны нийт үлдэгдэл
-            </Text>
-            <Amount
-              amount={totalBalance}
-              style={{ marginTop: sizes.mini }}
-              color={colors.white}
-            />
-          </BlurView>
-          <View style={{ gap: sizes.mini, marginTop: sizes.mini }}>
-            {accounts.map((account) => (
-              <Pressable
-                key={account.id}
-                onPress={() =>
-                  router.navigate({
-                    params: { primaryColor: account.primaryColor },
-                    pathname: "/transaction/accountDetail",
-                  })
-                }
+          {accounts.length > 1 ? (
+            <>
+              <View style={styles.bluredContent}>
+                {accounts?.map((account) => {
+                  const maxBalanceAccount = accounts.reduce(
+                    (maxAccount, currentAccount) => {
+                      return currentAccount.balance > maxAccount.balance
+                        ? currentAccount
+                        : maxAccount;
+                    },
+                    accounts[0]
+                  );
+                  return (
+                    <Circle
+                      key={account.accountNumber}
+                      width={
+                        ((sizes.window.width - 24) * account.balance) /
+                        totalBalance
+                      }
+                      height={
+                        (CARD_HEIGHT * account.balance) /
+                        maxBalanceAccount.balance
+                      }
+                      bgColor={account.primaryColor}
+                    />
+                  );
+                })}
+              </View>
+
+              <BlurView
+                style={styles.blurView}
+                intensity={90}
+                tint="systemUltraThinMaterialDark"
+                blurReductionFactor={4}
+                experimentalBlurMethod="dimezisBlurView"
               >
-                <AccountCard
-                  title={account.title}
-                  balance={account.balance}
-                  accountNumber={account.accountNumber}
-                  textColor={account.primaryColor}
-                  bankId={account.id}
+                <Text style={{ color: colors["white-60"] }}>
+                  {accounts.length} дансны нийт үлдэгдэл
+                </Text>
+                <Amount
+                  amount={totalBalance}
+                  style={{ marginTop: sizes.mini }}
+                  color={colors.white}
                 />
-              </Pressable>
-            ))}
-            <Button
-              title="Данс нэмэх"
-              contained={false}
-              onPress={() => console.log("ok")}
-              disabled={false}
-            />
-          </View>
+              </BlurView>
+            </>
+          ) : null}
+          {accounts.length === 0 ? (
+            <View>
+              <LinearGradient
+                colors={["#006CED", "#8750FD"]}
+                style={styles.gradientView}
+                locations={[0.8, 0.2]}
+                start={{ x: 0.9, y: 0.9 }}
+                end={{ x: 0, y: 1 }}
+              >
+                <View style={{ width: 180 }}>
+                  <Text fontSize={18} style={{ color: colors.white }}>
+                    Та мерчанд болоход бэлэн үү?
+                  </Text>
+                  <Pressable
+                    onPress={() => router.navigate("/send-request")}
+                    style={styles.button}
+                  >
+                    <Text fontSize={18} style={{ color: colors.white }}>
+                      Хүсэлт илгээх
+                    </Text>
+                  </Pressable>
+                </View>
+                <View
+                  style={{
+                    aspectRatio: 1,
+                    backgroundColor: colors.red,
+                    borderRadius: 50,
+                    width: 100,
+                  }}
+                />
+              </LinearGradient>
+            </View>
+          ) : (
+            <View style={{ gap: sizes.mini, marginTop: sizes.mini }}>
+              {accounts.map((account) => (
+                <Pressable
+                  key={account.id}
+                  onPress={() =>
+                    router.navigate({
+                      params: { primaryColor: account.primaryColor },
+                      pathname: "/account/account-detail",
+                    })
+                  }
+                >
+                  <AccountCard
+                    title={account.title}
+                    balance={account.balance}
+                    accountNumber={account.accountNumber}
+                    textColor={account.primaryColor}
+                    bankId={account.id}
+                  />
+                </Pressable>
+              ))}
+              <Button
+                title="Данс нэмэх"
+                contained={false}
+                onPress={() => console.log("ok")}
+                disabled={false}
+              />
+            </View>
+          )}
         </ScrollView>
       </Container>
     </>
@@ -210,5 +254,23 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     overflow: "hidden",
     width: "100%",
+  },
+  button: {
+    alignSelf: "flex-start",
+    borderColor: colors.white,
+    borderRadius: 20,
+    borderWidth: 1,
+    marginTop: sizes.medium,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    width: "auto",
+  },
+  gradientView: {
+    alignItems: "center",
+    aspectRatio: 5 / 3,
+    borderRadius: sizes.standard,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: sizes.small * 2,
   },
 });

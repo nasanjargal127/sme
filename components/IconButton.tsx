@@ -15,9 +15,7 @@ export function IconButton({
 }) {
   return (
     <Pressable style={styles.container} onPress={onPress}>
-      {/* <Link href="/" style={styles.container}> */}
       <Icon name={icon} height={28} color={colors.white} />
-      {/* </Link> */}
     </Pressable>
   );
 }

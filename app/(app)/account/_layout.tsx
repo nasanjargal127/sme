@@ -28,7 +28,7 @@ export default function AuthLayout() {
   return (
     <Stack>
       <Stack.Screen
-        name="accountDetail"
+        name="account-detail"
         options={{
           ...headerOptions,
           headerRight: () => (

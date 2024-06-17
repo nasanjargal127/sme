@@ -82,7 +82,6 @@ export function Input<T extends FieldValues>({
         field: { value, onChange, onBlur, disabled },
         fieldState: { error },
       }) => {
-        console.log(error);
         return (
           <View>
             <View

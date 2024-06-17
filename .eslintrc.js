@@ -12,6 +12,8 @@ module.exports = {
   },
   plugins: ["import", "typescript-sort-keys", "sort-keys-fix"],
   rules: {
+    "@typescript-eslint/ban-ts-comment": "warn",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "import/order": [
       "error",
       {
@@ -36,8 +38,15 @@ module.exports = {
         pathGroupsExcludedImportTypes: ["+(react|react-native)", "internal"],
       },
     ],
+    "no-else-return": "error",
+    "no-empty-function": "error",
+    "no-eval": "error",
     "no-undef": "error",
     "no-unused-vars": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "prefer-template": "error",
+    "react-native/no-raw-text": "off",
     "sort-keys": [
       "error",
       "asc",

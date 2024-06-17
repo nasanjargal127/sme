@@ -29,7 +29,7 @@ type FormValues = {
   name: string;
 };
 
-export default function AccountDetail() {
+export default function Transfer() {
   const navigation = useNavigation();
   const params = useLocalSearchParams();
 
