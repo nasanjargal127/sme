@@ -15,6 +15,7 @@ import { Pressable } from "@/components/Pressable";
 import { Text } from "@/components/Text";
 import { TransactionDetail } from "@/components/TransationDetail";
 import { colors } from "@/constants/colors";
+import { bankPrimaryColor } from "@/constants/data";
 import { sizes } from "@/constants/sizes";
 
 const statementData = [
@@ -38,15 +39,18 @@ export default function AccountDetail() {
   const insets = useSafeAreaInsets();
   const bottomSheetRef = useRef<BottomSheetModal>(null);
   const router = useRouter();
+  const bankId = parseInt(params.bankId as string);
 
   useEffect(() => {
     navigation.setOptions({
       contentStyle: {
-        backgroundColor: params.primaryColor,
+        backgroundColor: bankPrimaryColor[bankId],
       },
-      headerStyle: { backgroundColor: params.primaryColor },
+      headerStyle: { backgroundColor: bankPrimaryColor[bankId] },
     });
-  }, [navigation, params?.primaryColor]);
+  }, [navigation, bankId]);
+
+  console.log(bankPrimaryColor[bankId], bankId);
 
   return (
     <>
@@ -64,7 +68,7 @@ export default function AccountDetail() {
           balance={292992999999}
           accountNumber="2025116077"
           textColor={colors.white}
-          bankId={2}
+          bankId={bankId}
         />
       </View>
       <Container style={{ backgroundColor: colors.white }}>
@@ -76,19 +80,19 @@ export default function AccountDetail() {
                 <ActionButton
                   onPress={() =>
                     router.navigate({
-                      params: { primaryColor: params.primaryColor },
+                      params: { bankId },
                       pathname: "/account/transfer",
                     })
                   }
                   iconName="history"
                   text="Гүйлгээ хийх"
-                  bgColor={params.primaryColor as string}
+                  bgColor={bankPrimaryColor[bankId]}
                 />
                 <ActionButton
                   onPress={() => console.log("ok")}
                   iconName="history"
                   text="Хуулга харах"
-                  bgColor={params.primaryColor as string}
+                  bgColor={bankPrimaryColor[bankId]}
                 />
               </View>
               <Text
@@ -198,7 +202,7 @@ export default function AccountDetail() {
               <Icon
                 name="dismiss"
                 height={28}
-                color={params?.primaryColor as string}
+                color={bankPrimaryColor[bankId]}
               />
             </Pressable>
           </View>

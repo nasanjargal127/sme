@@ -13,6 +13,7 @@ import { Container } from "@/components/Container";
 import { Input } from "@/components/Input";
 import { KeyboardAvoidingView } from "@/components/KeyboardAvoidingView";
 import { colors } from "@/constants/colors";
+import { bankPrimaryColor } from "@/constants/data";
 import { sizes } from "@/constants/sizes";
 
 const formSchema = z.object({
@@ -32,6 +33,7 @@ type FormValues = {
 export default function Transfer() {
   const navigation = useNavigation();
   const params = useLocalSearchParams();
+  const bankId = parseInt(params.bankId as string);
 
   const { control, handleSubmit } = useForm({
     defaultValues: {
@@ -50,11 +52,11 @@ export default function Transfer() {
   useEffect(() => {
     navigation.setOptions({
       contentStyle: {
-        backgroundColor: params.primaryColor,
+        backgroundColor: bankPrimaryColor[bankId],
       },
-      headerStyle: { backgroundColor: params.primaryColor },
+      headerStyle: { backgroundColor: bankPrimaryColor[bankId] },
     });
-  }, [navigation, params?.primaryColor]);
+  }, [navigation, bankId]);
 
   return (
     <KeyboardAvoidingView>
@@ -73,7 +75,7 @@ export default function Transfer() {
             balance={2929929999}
             accountNumber="2025116077"
             textColor={colors.white}
-            bankId={2}
+            bankId={bankId}
           />
         </View>
         <Container

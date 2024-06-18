@@ -11,9 +11,10 @@ import { AccountCard } from "@/components/AccountCard";
 import { Amount } from "@/components/Amount";
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
+import { PosIcon } from "@/components/PosIcon";
 import { Pressable } from "@/components/Pressable";
 import { Text } from "@/components/Text";
-import { UserName } from "@/components/UserName";
+import { UserCard } from "@/components/UserCard";
 import { colors } from "@/constants/colors";
 import { sizes } from "@/constants/sizes";
 import { AccountType } from "@/types";
@@ -81,7 +82,7 @@ export default function HomeScreen() {
               width: 48,
             }}
           />
-          <UserName title="С. Очмандах" company="Oneline Technology LLC" />
+          <UserCard title="С. Очмандах" company="Oneline Technology LLC" />
         </View>
       </View>
       <Container bgColor="#F5F5F7">
@@ -111,23 +112,24 @@ export default function HomeScreen() {
                     },
                     accounts[0]
                   );
+
+                  const width =
+                    ((sizes.window.width - sizes.small * 2) * account.balance) /
+                    totalBalance;
+
+                  const height =
+                    (CARD_HEIGHT * account.balance) / maxBalanceAccount.balance;
+
                   return (
                     <Circle
                       key={account.accountNumber}
-                      width={
-                        ((sizes.window.width - 24) * account.balance) /
-                        totalBalance
-                      }
-                      height={
-                        (CARD_HEIGHT * account.balance) /
-                        maxBalanceAccount.balance
-                      }
+                      width={width}
+                      height={height}
                       bgColor={account.primaryColor}
                     />
                   );
                 })}
               </View>
-
               <BlurView
                 style={styles.blurView}
                 intensity={90}
@@ -168,14 +170,7 @@ export default function HomeScreen() {
                     </Text>
                   </Pressable>
                 </View>
-                <View
-                  style={{
-                    aspectRatio: 1,
-                    backgroundColor: colors.red,
-                    borderRadius: 50,
-                    width: 100,
-                  }}
-                />
+                <PosIcon />
               </LinearGradient>
             </View>
           ) : (
@@ -185,7 +180,7 @@ export default function HomeScreen() {
                   key={account.id}
                   onPress={() =>
                     router.navigate({
-                      params: { primaryColor: account.primaryColor },
+                      params: { bankId: account.id },
                       pathname: "/account/account-detail",
                     })
                   }
@@ -263,7 +258,6 @@ const styles = StyleSheet.create({
     marginTop: sizes.medium,
     paddingHorizontal: 12,
     paddingVertical: 6,
-    width: "auto",
   },
   gradientView: {
     alignItems: "center",

@@ -7,7 +7,7 @@ import { Container } from "@/components/Container";
 import { Icon, IconName } from "@/components/Icon";
 import { Pressable } from "@/components/Pressable";
 import { Text } from "@/components/Text";
-import { UserName } from "@/components/UserName";
+import { UserCard } from "@/components/UserCard";
 import { colors } from "@/constants/colors";
 import { sizes } from "@/constants/sizes";
 
@@ -19,7 +19,7 @@ export default function TabTwoScreen() {
         style={[styles.container, { paddingTop: insets.top + sizes.medium }]}
       >
         <View style={styles.profile} />
-        <UserName
+        <UserCard
           title="С. Очмандах"
           company="Oneline Technology LLC"
           isTitleAlign

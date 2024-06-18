@@ -5,7 +5,7 @@ import { colors } from "../constants/colors";
 
 import { Text } from "./Text";
 
-export function UserName({
+export function UserCard({
   title,
   company,
   isTitleAlign = false,

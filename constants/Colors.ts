@@ -8,6 +8,7 @@ export const colors = {
   "darkBlue-40": "rgba(2, 41, 92, 0.4)",
   "darkBlue-60": "rgba(2, 41, 92, 0.6)",
   errorRed: "#DF184D80",
+  gray: "#F5F5F7",
   green: "#23C197",
   "green-10": "rgba(35, 193, 151, 0.1)",
   lightBlue: "#006CED1A",
